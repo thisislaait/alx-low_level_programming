@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "main.c"
 
 /**
  * print_alphabet - Prints the alphabet in lowercase
@@ -13,4 +13,4 @@ void print_alphabet(void)
         letter++;
     }
     _putchar('\n');
-}
+i}
