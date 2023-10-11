@@ -4,9 +4,7 @@
 
 /**
  * print_to_98 - prints natural numbers from n to 98
- * @n: the starting number
- *
- * Description: This function prints all natural numbers from n to 98, separated
+ * This function prints all natural numbers from n to 98, separated
  * by a comma and space, in ascending or descending order depending on the
  * value of n. The first number printed is the value of n, and the last number
  * is always 98.
