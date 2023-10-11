@@ -1,16 +1,21 @@
-#include "holberton.h"
-
+#include "main.h"
 /**
- * print_alphabet - Prints the alphabet in lowercase
+ * print_alphabet_x10 - prints alphabet 10 times
+ *
+ * Return: always 0;
+ *
  */
-void print_alphabet(void)
+void print_alphabet_x10(void)
 {
-    char letter = 'a';
+	char i;
+	char h;
 
-    while (letter <= 'z')
-    {
-        _putchar(letter);
-        letter++;
-    }
-    _putchar('\n');
+	for (h = 0; h <= 9; h++)
+	{
+		for (i = 'a'; i <= 'z'; i++)
+		{
+			_putchar(i);
+		}
+		_putchar('\n');
+	}
 }
