@@ -8,23 +8,21 @@ int main(void)
 {
 	int counter = 2;
 
-	float a = 1;
-	float b = a + 1;
-	float c = a + b;
+	unsigned long a = 1;
+        unsigned long b = 1;
+   	unsigned long c;
 
-	printf("%.0f, ", a);
-	printf("%.0f, ", b);
-	while (counter < 98)
-	{
-		counter++;
-		printf("%.0f", c);
-		a = b;
-		b = c;
-		c = a + b;
-		if (counter < 98)
-		{
+    	printf("%lu, %lu, ", a, b);
+    	while (counter < 98)
+    	{
+        	c = a + b;
+       		printf("%lu", c);
+        	a = b;
+        	b = c;
+        	if (counter < 97)
 			printf(", ");
 		}
+		counter++;
 	}
 	printf("\n");
 	return (0);
