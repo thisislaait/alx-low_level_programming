@@ -2,8 +2,7 @@
 
 /**
  * print_number - prints an integer
- *
- * @n: character defined
+ * @n: integer to be printed
  */
 void print_number(int n)
 {
@@ -25,10 +24,10 @@ void print_number(int n)
 	{
 		divisor *= 10;
 	}
-	while  (divisor != 0)
+	while (divisor != 0)
 	{
 		_putchar(n / divisor + '0');
-		n % = divisor;
-		divisor / = 10;
+		n %= divisor;
+		divisor /= 10;
 	}
 }
