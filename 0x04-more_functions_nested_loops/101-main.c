@@ -1,21 +1,21 @@
 #include "main.h"
 
 /**
- * main - Entry point to print numbers
- * Description: Prints a sequence of numbers indefinitly
- * Return: Always 0 (Success)
+ * main - Entry point
+ *
+ * Return: Always 0
  */
-
 int main(void)
 {
-	int n = 1;
-
-	while (1)
-	{
-		print_number(n);
-		_putchar('\n');
-		n++;
-	}
-
+	print_number(98);
+	_putchar('\n');
+	print_number(402);
+	_putchar('\n');
+	print_number(1024);
+	_putchar('\n');
+	print_number(0);
+	_putchar('\n');
+	print_number(-98);
+	_putchar('\n');
 	return (0);
 }
