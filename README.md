@@ -1,1 +1,1 @@
-starting to learn C
+we are learning strings now
