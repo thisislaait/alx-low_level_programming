@@ -11,6 +11,8 @@ int add(int, int);
 int _isupper(int c);
 int _isdigit(int c);
 int mul(int a, int b);
+int _strlen(char *s);
+int _atoi(char *s);
 
 void print_alphabet(void);
 void print_alphabet_x10(void);
@@ -27,4 +29,15 @@ void print_square(int size);
 void print_triangle(int size);
 void print_number(int n);
 void reset_to_98(int *n);
+void swap_int(int *a, int *b);
+void _puts(char *str);
+void print_rev(char *s);
+void rev_string(char *s);
+void puts2(char *str);
+void puts_half(char *str);
+void print_array(int *a, int n);
+
+
+char *_strcpy(char *dest, char *src);
+
 #endif /* MAIN_H */
