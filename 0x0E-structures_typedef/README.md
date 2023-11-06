@@ -1,0 +1,1 @@
+understnding structures, typedef
