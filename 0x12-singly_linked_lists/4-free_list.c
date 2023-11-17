@@ -8,15 +8,15 @@
  * @head: Pointer to the head of the list.
  */
 void free_list(list_t *head)
+void free_list(list_t *head)
 {
-    list_t *current = head;
-    list_t *next;
+	list_t *temporary;
 
-    while (current != NULL)
-    {
-        next = current->next;  // Save the next node before freeing the current one
-        free(current->str);    // Free the string
-        free(current);         // Free the node
-        current = next;        // Move to the next node
-    }
+	while (head != NULL)
+	{
+		temporary = head->next;
+		free(head->str);
+		free(head);
+		head = temporary;
+	}
 }
