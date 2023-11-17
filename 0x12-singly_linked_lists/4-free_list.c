@@ -1,20 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "lists.h"
+#include <string.h>
+
 /**
- * free_list - frees a list
- * @head: head var
+ * free_list - Frees a list and its strings.
+ * @head: Pointer to the head of the list.
  */
 void free_list(list_t *head)
 {
-	list_t *temporary;
+    list_t *temp;
 
-	while (head != NULL)
-	{
-		temporary = head->next;
-		free(head->str);
-		free(head);
-		head = temporary;
-	}
+    while (head != NULL)
+    {
+        temp = head->next;
+        free(head->str);
+        free(head);
+        head = temp;
+    }
 }
