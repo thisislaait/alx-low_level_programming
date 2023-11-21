@@ -1,36 +1,46 @@
 #include "lists.h"
+
 /**
- * print_listint_safe - function that prints a linked list with a loop safely.
- * @head: pointer to the 1st node of the linked list
- * Return: new_node
+ * free_listp - Prints a linked list
+ * @head: head of a list.
+ *
+ * Return: number of nodes in the list.
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	const listint_t *tmp_n = NULL;
-	const listint_t *l_n = NULL;
-	size_t counter = 0;
-	size_t new_n;
+	int i, flag = 0;
+	listint_t *slow, *fast;
 
-	tmp_n = head;
-	while (tmp_n)
+	if (!head)
+		exit(98);
+	for (i = 1; (*head).next && !flag; head = (*head).next, i++)
 	{
-		printf("[%p] %d\n", (void *)tmp_n, tmp_n->n);
-		counter++;
-		tmp_n = tmp_n->next;
-		l_n = head;
-		new_n = 0;
-		while (new_n < counter)
+		if ((*head).next)
+			slow = (*head).next;
+		if ((*head).next->next)
+			fast = (*head).next->next;
+		while (slow != fast)
 		{
-			if (tmp_n == l_n)
-			{
-				printf("-> [%p] %d\n", (void *)tmp_n, tmp_n->n);
-				return (counter);
-			}
-			l_n = l_n->next;
-			new_n++;
+			if (slow)
+				slow = (*slow).next;
+			if (fast == head)
+				flag = 1;
+			if (fast && !flag)
+				fast = (*fast).next;
+			if (fast == head)
+				flag = 1;
+			if (fast && !flag)
+				fast = (*fast).next;
+			if (fast == head)
+				flag = 1;
 		}
-		if (!head)
-			exit(98);
+		printf("[%p] %d\n", (void *)head, (*head).n);
 	}
-	return (counter);
+
+	for (; flag && (*head).next != fast; i++, head = (*head).next)
+		printf("[%p] %d\n", (void *)head, (*head).n);
+	printf("[%p] %d\n", (void *)head, (*head).n);
+	if (fast)
+		printf("-> [%p] %d\n", (void *)fast, (*fast).n);
+	return (i);
 }
