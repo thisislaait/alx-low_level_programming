@@ -9,39 +9,41 @@
  */
 size_t free_listint_safe(listint_t **h)
 {
-        size_t size = 0;
-	    listint_t *slow, *fast, *temp;
+	int i, flag = 0;
+	listint_t *slow, *fast, *delete;
 
-	    if (h == NULL || *h == NULL)
-		    return (0);
+	if (!h)
+		return (0);
 
-	    slow = *h;
-	    fast = (*h)->next;
+	for (i = 0; *h && !flag; i++)
+	{
+		slow = *h;
+		fast = (**h).next;
+		while (slow != fast)
+		{
+			if (slow)
+				slow = (*slow).next;
+			if (fast)
+				fast = (*fast).next;
+			if (fast == *h)
+				flag = 1;
+			if (fast)
+				fast = (*fast).next;
+			if (fast == *h)
+				flag = 1;
+		}
+		delete = *h;
+		*h = (**h).next;
+		free(delete);
+	}
 
-	    while (fast && fast < slow)
-	    {
-		    temp = fast->next;
-		    free(fast);
-		    size++;
-		    fast = temp;
-
-		    if (fast)
-			    fast = fast->next;
-
-		    if (fast)
-			    fast = fast->next;
-
-		    slow = slow->next;
-	    }
-
-	    while (fast && *h != fast)
-	    {
-		    temp = *h;
-		    *h = (*h)->next;
-		    free(temp);
-		    size++;
-	    }
-
-	    *h = NULL;
-	    return (size);
+	while (flag && *h != fast)
+	{
+		delete = *h;
+		i++;
+		*h = (**h).next;
+		free(delete);
+	}
+	*h = NULL;
+	return (i);
 }
