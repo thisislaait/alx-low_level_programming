@@ -1,23 +1,22 @@
 #include "lists.h"
+
 /**
- * get_nodeint_at_index - gets node at index
- * @head: linked list at head
- * @index: index of node to grab
- * Return: node at index
+ * get_nodeint_at_index - returns the node at a certain index in a linked list
+ * @head: first node in the linked list
+ * @index: index of the node to return
+ *
+ * Return: pointer to the node we're looking for, or NULL
  */
 listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 {
-	unsigned int count = 0;
-	listint_t *tmp;
+	unsigned int i = 0;
+	listint_t *temp = head;
 
-	tmp = head;
-	while (count != index && tmp != NULL)
+	while (temp && i < index)
 	{
-		count++;
-		tmp = tmp->next;
+		temp = temp->next;
+		i++;
 	}
 
-	if (count != index)
-		return (NULL);
-	return (tmp);
+	return (temp ? temp : NULL);
 }
