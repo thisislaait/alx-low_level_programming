@@ -3,20 +3,22 @@
 /**
  * free_listint2 - frees a list and sets head to null
  * @head: Points to list head
- * Return: void
  */
 void free_listint2(listint_t **head)
 {
-		listint_t *tmp;
+		listint_t *freenode;
+		listint_t *current;
 
 		if (head == NULL)
-			return;
-		while (*head)
-		{
-			tmp = *head;
-			free(tmp);
-			*head = (*head)->next;
+		{	
+			current = *head;
+			while (current != NULL)
+			{
+				freenode = current;
+				current = current->next;
+				free(freenode);
+			}
+		*head = NULL;
 		}
-		head = NULL;
 }
 
