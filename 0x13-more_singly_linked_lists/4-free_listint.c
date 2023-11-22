@@ -2,16 +2,17 @@
 /**
  * free_listint - frees the list
  * @head: points to head
- *
+ * Return:void
  */
 void free_listint(listint_t *head)
 {
-	listint_t *tmp;
+	listint_t *tmp *t;
 
-	while (head != NULL)
+	t =head;
+	while (t != NULL)
 	{
-		tmp = head;
-		free(head);
-		head = tmp->next;
+		tmp = t->next;
+		free(t);
+		t = tmp;
 	}
 }
