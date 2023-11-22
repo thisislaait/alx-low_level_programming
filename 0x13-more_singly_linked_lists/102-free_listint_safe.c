@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
- * free_listp2 - frees a linked list safely
+ * free_listint_safe - frees a linked list safely
  * @head: head of a list.
  *
  * Return: size of list that is free

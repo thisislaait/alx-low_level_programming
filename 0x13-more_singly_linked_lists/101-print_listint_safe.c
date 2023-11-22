@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * free_listp - Prints a linked list
+ * print_listint_safe - Prints a linked list
  * @head: head of a list.
  *
  * Return: number of nodes in the list.
