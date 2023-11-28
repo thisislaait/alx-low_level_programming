@@ -74,13 +74,15 @@ void close_elf(int elf);
  * @argv: An array of pointers to the arguments.
  * Return: 0 on success.
  */
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     Elf64_Ehdr *header;
     int file_descriptor, read_result;
-
-    if (argc != 2) {
-        dprintf(STDERR_FILENO, "Usage: %s <file>\n", argv[0]);
-        exit(97);
+    
+    if (argc != 2) 
+    {
+            dprintf(STDERR_FILENO, "Usage: %s     <file>\n", argv[0]);
+            exit(97);
     }
 
     file_descriptor = open(argv[1], O_RDONLY);
@@ -88,22 +90,24 @@ int main(int argc, char *argv[]) {
         dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
         exit(98);
     }
-
+    
     header = malloc(sizeof(Elf64_Ehdr));
-    if (header == NULL) {
+    if (header == NULL) 
+    {
         close_elf(file_descriptor);
         dprintf(STDERR_FILENO, "Error: Can't allocate memory\n");
         exit(98);
     }
 
     read_result = read(file_descriptor, header, sizeof(Elf64_Ehdr));
-    if (read_result == -1) {
+    if (read_result == -1) 
+    {
         free(header);
         close_elf(file_descriptor);
         dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
         exit(98);
     }
-
+    
     check_elf(header->e_ident);
     printf("ELF Header:\n");
     print_magic(header->e_ident);
@@ -118,13 +122,20 @@ int main(int argc, char *argv[]) {
     free(header);
     close_elf(file_descriptor);
 
-    return 0;
+    return (0);
 }
 
-void check_elf(unsigned char *e_ident) {
+/**
+ * check_elf - Checks if a file is an ELF file.
+ * @e_ident: A pointer to an array containing the ELF magic numbers.
+ * Description: If the file is not an ELF file - exit code 98.
+ */
+void check_elf(unsigned char *e_ident) 
+{
     int index;
 
-    for (index = 0; index < 4; index++) {
+    for (index = 0; index < 4; index++) 
+    {
         if (e_ident[index] != 127 &&
             e_ident[index] != 'E' &&
             e_ident[index] != 'L' &&
@@ -135,12 +146,19 @@ void check_elf(unsigned char *e_ident) {
     }
 }
 
-void print_magic(unsigned char *e_ident) {
+/**
+ * print_magic - Prints the magic numbers of an ELF header.
+ * @e_ident: A pointer to an array containing the ELF magic numbers.
+ * Description: Magic numbers are separated by spaces.
+ */
+void print_magic(unsigned char *e_ident) 
+{
     int index;
 
     printf("  Magic:   ");
 
-    for (index = 0; index < EI_NIDENT; index++) {
+    for (index = 0; index < EI_NIDENT; index++) 
+    {
         printf("%02x", e_ident[index]);
 
         if (index == EI_NIDENT - 1)
@@ -150,10 +168,12 @@ void print_magic(unsigned char *e_ident) {
     }
 }
 
-void print_class(unsigned char *e_ident) {
+void print_class(unsigned char *e_ident) 
+{
     printf("  Class:                             ");
 
-    switch (e_ident[EI_CLASS]) {
+    switch (e_ident[EI_CLASS]) 
+    {
         case ELFCLASSNONE:
             printf("none\n");
             break;
@@ -168,26 +188,29 @@ void print_class(unsigned char *e_ident) {
     }
 }
 
-void print_data(unsigned char *e_ident) {
-    printf("  Data:                              ");
+void print_data(unsigned char *e_ident) 
+{
+        printf("    Data:                              ");
 
-    switch (e_ident[EI_DATA]) {
-        case ELFDATANONE:
-            printf("none\n");
-            break;
-        case ELFDATA2LSB:
-            printf("2's complement, little endian\n");
-            break;
-        case ELFDATA2MSB:
-            printf("2's complement, big endian\n");
-            break;
-        default:
-            printf("<unknown: %x>\n", e_ident[EI_CLASS]);
+        switch (e_ident[EI_DATA]) 
+        {
+            case ELFDATANONE:
+                printf("none\n");
+                break;
+            case ELFDATA2LSB:
+                printf("2's complement, little endian\n");
+                break;
+            case ELFDATA2MSB:
+                printf("2's complement, big endian\n");
+                break;
+            default:
+                printf("<unknown: %x>\n", e_ident[EI_CLASS]);
     }
 }
 
-void print_version(unsigned char *e_ident) {
-    printf("  Version:                           %d",
+void print_version(unsigned char *e_ident) 
+{
+        printf("  Version:                           %d",
            e_ident[EI_VERSION]);
 
     switch (e_ident[EI_VERSION]) {
@@ -200,7 +223,8 @@ void print_version(unsigned char *e_ident) {
     }
 }
 
-void print_osabi(unsigned char *e_ident) {
+void print_osabi(unsigned char *e_ident) 
+{
     printf("  OS/ABI:                            ");
 
     switch (e_ident[EI_OSABI]) {
@@ -239,18 +263,21 @@ void print_osabi(unsigned char *e_ident) {
     }
 }
 
-void print_abi(unsigned char *e_ident) {
+void print_abi(unsigned char *e_ident) 
+{
     printf("  ABI Version:                       %d\n",
            e_ident[EI_ABIVERSION]);
 }
 
-void print_type(unsigned int e_type, unsigned char *e_ident) {
+void print_type(unsigned int e_type, unsigned char *e_ident) 
+{
     if (e_ident[EI_DATA] == ELFDATA2MSB)
         e_type >>= 8;
 
     printf("  Type:                              ");
 
-    switch (e_type) {
+    switch (e_type) 
+    {
         case ET_NONE:
             printf("NONE (None)\n");
             break;
@@ -272,7 +299,8 @@ void print_type(unsigned int e_type, unsigned char *e_ident) {
 }
 
 
-void print_entry(unsigned long int e_entry, unsigned char *e_ident) {
+void print_entry(unsigned long int e_entry, unsigned char *e_ident) 
+{
     printf("  Entry point address:               ");
 
     if (e_ident[EI_DATA] == ELFDATA2MSB) {
@@ -287,7 +315,8 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident) {
         printf("%#lx\n", e_entry);
 }
 
-void close_elf(int elf) {
+void close_elf(int elf)
+{
     if (close(elf) == -1) {
         dprintf(STDERR_FILENO,
                 "Error: Can't close fd %d\n", elf);
