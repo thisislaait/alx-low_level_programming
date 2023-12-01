@@ -1,13 +1,13 @@
 #include "main.h"
 /**
- * main - Copy content from one file to another.
- * @ac: Argument count.
- * @av: Array of arguments.
- * Return: 0 on success, appropriate exit code on failure.
+ * main - program to copy
+ * @ac: argument count
+ * @av: array of arguments
+ * Return: a value
  */
 int main(int ac, char **av)
 {
-	int fd_from, fd_to, bytesWritten, bytesRead;
+	int fdFrom, fdToo, wrote, read;
 	char buff[1024];
 
 	if (ac != 3)
@@ -15,40 +15,40 @@ int main(int ac, char **av)
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	fd_from = open(av[1], O_RDONLY);
-	if (fd_from == -1)
+	fdFrom = open(av[1], O_RDONLY);
+	if (fdFrom == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
 		exit(98);
 	}
-	fd_to = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (fd_to == -1)
+	fdToo = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (fdToo == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
 		exit(99);
 	}
-	while ((bytesRead = bytesRead(fd_from, buff, 1024)) > 0)
+	while ((read = read(fdFrom, buff, 1024)) > 0)
 	{
-		bytesWritten = write(fd_to, buff, bytesRead);
-		if (bytesWritten == -1)
+		wrote = write(fdToo, buff, read);
+		if (wrote == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
 			exit(99);
 		}
 	}
-	if (bytesRead == -1)
+	if (read == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
 		exit(98);
 	}
-	if (close(fd_from) == -1)
+	if (close(fdFrom) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d", fd_from);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d", fdFrom);
 		exit(100);
 	}
-	if (close(fd_to) == -1)
+	if (close(fdToo) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d", fd_to);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d", fdToo);
 		exit(100);
 	}
 	return (0);
