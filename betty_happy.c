@@ -6,7 +6,7 @@
 #define MAX_PASSWORD_LEN 20
 
 /**
- * User - Structure to store username and password.
+ * struct User - Structure to store username and password.
  * @username: Array to store the username.
  * @password: Array to store the password.
  */
@@ -59,7 +59,7 @@ int authenticateUser(const char *username, const char *password, int numUsers)
 	for (int i = 0; i < numUsers; ++i)
 	{
 		if (strcmp(users[i].username, username) == 0 &&
-        strcmp(users[i].password, password) == 0)
+			strcmp(users[i].password, password) == 0)
 		{
 			return (1); /* Authentication successful */
 		}
