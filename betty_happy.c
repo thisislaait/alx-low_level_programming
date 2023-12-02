@@ -10,9 +10,10 @@
  * @username: Array to store the username.
  * @password: Array to store the password.
  */
-struct User {
-	char username[MAX_USERNAME_LEN];
-	char password[MAX_PASSWORD_LEN];
+struct User 
+{
+    char username[MAX_USERNAME_LEN];
+    char password[MAX_PASSWORD_LEN];
 };
 
 /**
@@ -30,17 +31,17 @@ struct User users[MAX_USERS];
  */
 void registerUser(const char *username, const char *password, int *numUsers)
 {
-	if (*numUsers < MAX_USERS)
-	{
-		strcpy(users[*numUsers].username, username);
-		strcpy(users[*numUsers].password, password);
-		(*numUsers)++;
-		printf("User registered successfully!\n");
-	}
-	else
-	{
-		printf("Cannot register more users. User limit reached.\n");
-	}
+    if (*numUsers < MAX_USERS)
+    {
+        strcpy(users[*numUsers].username, username);
+        strcpy(users[*numUsers].password, password);
+        (*numUsers)++;
+        printf("User registered successfully!\n");
+    }
+    else
+    {
+        printf("Cannot register more users. User limit reached.\n");
+    }
 }
 
 /**
@@ -55,14 +56,15 @@ void registerUser(const char *username, const char *password, int *numUsers)
  */
 int authenticateUser(const char *username, const char *password, int numUsers)
 {
-	for (int i = 0; i < numUsers; ++i)
-	{
-		if (strcmp(users[i].username, username) == 0 && strcmp(users[i].password, password) == 0)
-		{
-			return (1); /* Authentication successful */
-		}
-	}
-	return (0); /* Authentication failed */
+    for (int i = 0; i < numUsers; ++i)
+    {
+        if (strcmp(users[i].username, username) == 0 &&
+            strcmp(users[i].password, password) == 0)
+        {
+            return (1); /* Authentication successful */
+        }
+    }
+    return (0); /* Authentication failed */
 }
 
 /**
@@ -73,30 +75,30 @@ int authenticateUser(const char *username, const char *password, int numUsers)
  */
 int main(void)
 {
-	int numUsers = 0;
+    int numUsers = 0;
 
-	registerUser("user1", "password123", &numUsers);
+    registerUser("user1", "password123", &numUsers);
 
-	/* Simulate user login */
-	char inputUsername[MAX_USERNAME_LEN];
-	char inputPassword[MAX_PASSWORD_LEN];
+    /* Simulate user login */
+    char inputUsername[MAX_USERNAME_LEN];
+    char inputPassword[MAX_PASSWORD_LEN];
 
-	/* Get input from user */
-	printf("Enter username: ");
-	scanf("%s", inputUsername);
+    /* Get input from user */
+    printf("Enter username: ");
+    scanf("%s", inputUsername);
 
-	printf("Enter password: ");
-	scanf("%s", inputPassword);
+    printf("Enter password: ");
+    scanf("%s", inputPassword);
 
-	/* Authenticate the user */
-	if (authenticateUser(inputUsername, inputPassword, numUsers))
-	{
-		printf("Authentication successful. Access granted!\n");
-	}
-	else
-	{
-		printf("Authentication failed. Access denied.\n");
-	}
+    /* Authenticate the user */
+    if (authenticateUser(inputUsername, inputPassword, numUsers))
+    {
+        printf("Authentication successful. Access granted!\n");
+    }
+    else
+    {
+        printf("Authentication failed. Access denied.\n");
+    }
 
-	return (0);
+    return (0);
 }
