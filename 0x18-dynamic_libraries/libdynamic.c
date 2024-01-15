@@ -22,9 +22,7 @@ int _isalpha(int c)
     return (_islower(c) || (_isupper(c)));
 }
 
-/* Implement the remaining functions with similar style */
 
-/* For the sake of brevity, here is the implementation for _strlen as an example */
 /**
  * _strlen - Calculates the length of a string
  * @s: The string to calculate the length of
@@ -34,10 +32,11 @@ int _isalpha(int c)
 int _strlen(char *s)
 {
     int len = 0;
+
     while (*s != '\0')
-    {
-        len++;
-        s++;
-    }
-    return len;
+        {
+            len++;
+            s++;
+        }
+        return (len);
 }
